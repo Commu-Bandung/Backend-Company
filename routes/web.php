@@ -11,12 +11,8 @@
 |
 */
 
-Route::get('/homepage', function () {
-	return view('pages.homepage');
-});
-
-Route::get('/about', function () {
-	return 'Aplikasi Laravel';
+Route::get('/login', function () {
+	return view('auth/login');
 });
 
 Route::get('/', function () {
@@ -26,3 +22,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+
+Route::group(['middleware' => ['web']], function() {
+  Route::resource('blog','BlogController');
+  Route::post ( '/editItem', 'BlogController@editItem' );
+  Route::post ( '/addItem', 'BlogController@addItem' );
+  Route::post ( '/deleteItem', 'BlogController@deleteItem' );
+});
