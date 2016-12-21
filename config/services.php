@@ -25,6 +25,25 @@ return [
         'region' => 'us-east-1',
     ],
 
+    'google' => [
+    'client_id' => '466634856488-1hqrbvkftqhstj3j46fb6ik1q72fkruh.apps.googleusercontent.com', // configure with your app id
+    'client_secret' => 'iUGwM4RLFMcGWnEtoTY0euKh', // your app secret
+    'redirect' => 'http://localhost:8000/auth/google/callback', // leave blank for now
+    ],
+
+    'twitter' => [ //change it to any provider
+            'client_id' => 'Fg82iWAjUzcTist4pcOSRmSfH',
+            'client_secret' => 'sNn3539eXwhywczoamHgyYPNSgOzFyB34ZRcROyHZX8Ty3TLjy',
+            'redirect' => 'http://localhost:8000/auth/twitter/callback',
+        ],
+
+    'facebook' => [ //change it to any provider
+        'client_id' => '1366671970131531',
+        'client_secret' => '3f8e5fb922a79b63705a37ce846aca50',
+        'redirect' => 'http://localhost:8000/auth/facebook/callback',
+    ],
+
+
     'sparkpost' => [
         'secret' => env('SPARKPOST_SECRET'),
     ],
