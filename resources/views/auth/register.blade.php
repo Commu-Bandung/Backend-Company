@@ -1,6 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Commu For Company</title>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+
+
+        <!-- Styles -->
+
+
+        <link href="/bootstrap-social-gh-pages/bootstrap-social.css" rel="stylesheet">
+
+        <link href="/bootstrap-social-gh-pages/assets/css/bootstrap.css" rel="stylesheet">
+        <link href="/bootstrap-social-gh-pages/assets/css/font-awesome.css" rel="stylesheet">
+        <link href="/bootstrap-social-gh-pages/assets/css/docs.css" rel="stylesheet" >
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -25,18 +46,19 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                           <label class="col-md-4 control-label">Username</label>
+               <label class="col-md-4 control-label">Username</label>
 
-                            <div class="col-md-6">
-                               <input type="text" class="form-control" name="username" value="{{ old('username') }}">
+                <div class="col-md-6">
+                   <input type="text" class="form-control" name="username" value="{{ old('username') }}">
 
-                               @if ($errors->has('username'))
-                                  <span class="help-block">
-                                     <strong>{{ $errors->first('username') }}</strong>
-                                  </span>
-                               @endif
-                            </div>
-                        </div>
+                   @if ($errors->has('username'))
+                      <span class="help-block">
+                         <strong>{{ $errors->first('username') }}</strong>
+                      </span>
+                   @endif
+                </div>
+            </div>
+            
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
@@ -79,6 +101,24 @@
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
+                            </div>
+                            <div class="content">
+
+                              <br> </br>
+
+
+                              <a href="{{ url('/auth/facebook') }}" class="btn btn-block btn-social btn-facebook">
+                                <span class="fa fa-facebook"></span> Sign in with Facebook
+                              </a>
+                                    <br>
+                              <a href="{{ url('/auth/twitter') }}" class="btn btn-block btn-social btn-twitter">
+                                <span class="fa fa-twitter"></span> Sign in with Twitter
+                              </a>
+                                    <br>
+                              <a href="{{ url('/auth/google') }}" class="btn btn-block btn-social btn-google">
+                                <span class="fa fa-google"></span> Sign in with Google
+                              </a>
+
                             </div>
                         </div>
                     </form>
