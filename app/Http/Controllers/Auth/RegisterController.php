@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App\SocialProvider;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Socialite;
 
 class RegisterController extends Controller
 {
@@ -50,7 +51,6 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'username' => 'required|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -66,9 +66,53 @@ class RegisterController extends Controller
          {
              return User::create([
                  'name' => $data['name'],
-                 'username' => $data['username'],
                  'email' => $data['email'],
                  'password' => bcrypt($data['password']),
              ]);
          }
-     }
+
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback($provider)
+    {
+        try
+        {
+            $socialUser = Socialite::driver($provider)->user();
+        }
+        catch(\Exception $e)
+        {
+            return redirect('/blog');
+        }
+        //check if we have logged provider
+        $socialProvider = SocialProvider::where('provider_id',$socialUser->getId())->first();
+        if(!$socialProvider)
+        {
+            //create a new user and provider
+            $user = User::firstOrCreate(
+                ['email' => $socialUser->getEmail()],
+                ['name' => $socialUser->getName()]
+            );
+            $user->socialProviders()->create(
+                ['provider_id' => $socialUser->getId(), 'provider' => $provider]
+            );
+        }
+        else
+            $user = $socialProvider->user;
+        auth()->login($user);
+        return redirect('/home');
+    }
+
+}

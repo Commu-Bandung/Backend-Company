@@ -21,12 +21,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-
-
 Route::group(['middleware' => ['web']], function() {
   Route::resource('blog','BlogController');
   Route::post ( '/editItem', 'BlogController@editItem' );
   Route::post ( '/addItem', 'BlogController@addItem' );
   Route::post ( '/deleteItem', 'BlogController@deleteItem' );
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+Route::get('auth/{provider}', 'Auth\RegisterController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCallback');
