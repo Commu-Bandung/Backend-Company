@@ -24,12 +24,11 @@ return [
         'secret' => env('SES_SECRET'),
         'region' => 'us-east-1',
     ],
-
-    'google' => [
-    'client_id' => '466634856488-1hqrbvkftqhstj3j46fb6ik1q72fkruh.apps.googleusercontent.com', // configure with your app id
-    'client_secret' => 'iUGwM4RLFMcGWnEtoTY0euKh', // your app secret
-    'redirect' => 'http://localhost:8000/auth/google/callback', // leave blank for now
-    ],
+        'google' => [
+        'client_id' => '466634856488-1hqrbvkftqhstj3j46fb6ik1q72fkruh.apps.googleusercontent.com', // configure with your app id
+        'client_secret' => 'iUGwM4RLFMcGWnEtoTY0euKh', // your app secret
+        'redirect' => 'http://localhost:8000/auth/google/callback', // leave blank for now
+        ],
 
     'twitter' => [ //change it to any provider
             'client_id' => 'Fg82iWAjUzcTist4pcOSRmSfH',

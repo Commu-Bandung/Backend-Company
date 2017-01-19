@@ -7,7 +7,11 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Socialite;
-
+use App\Transformers\UserTransformer;
+/**
+ * Class RegisterController
+ * @package %%NAMESPACE%%\Http\Controllers\Auth
+ */
 class RegisterController extends Controller
 {
     /*
@@ -24,12 +28,21 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('adminlte::auth.register');
+    }
+
+    /**
      * Where to redirect users after login / registration.
      *
      * @var string
      */
     protected $redirectTo = '/home';
-
 
     /**
      * Create a new controller instance.
@@ -52,7 +65,12 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
+            'nama_perusahaan' => 'required|max:250',
+            'alamat_perusahaan' => 'required|max:250',
+            'deskripsi_perusahaan' => 'required|max:250',
+            'jenis_perusahaan' => 'required|max:250',
             'password' => 'required|min:6|confirmed',
+            'terms' => 'required',
         ]);
     }
 
@@ -62,17 +80,20 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-     protected function create(array $data)
-         {
-             return User::create([
-                 'name' => $data['name'],
-                 'email' => $data['email'],
-                 'password' => bcrypt($data['password']),
-             ]);
-         }
-
-
-    /**
+    protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'nama_perusahaan' => $data['nama_perusahaan'],
+            'alamat_perusahaan' => $data['alamat_perusahaan'],
+            'deskripsi_perusahaan' => $data['deskripsi_perusahaan'],
+            'jenis_perusahaan' => $data['jenis_perusahaan'],
+            'password' => bcrypt($data['password']),
+            'api_token' => bcrypt($data['email']),
+        ]);
+    }
+      /**
      * Redirect the user to the GitHub authentication page.
      *
      * @return Response
@@ -94,7 +115,7 @@ class RegisterController extends Controller
         }
         catch(\Exception $e)
         {
-            return redirect('/blog');
+            return redirect('/home');
         }
         //check if we have logged provider
         $socialProvider = SocialProvider::where('provider_id',$socialUser->getId())->first();

@@ -136,9 +136,6 @@ return [
     */
 
     'providers' => [
-    // Other service providers...
-
-
 
         /*
          * Laravel Framework Service Providers...
@@ -165,11 +162,12 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
 
         /*
          * Package Service Providers...
          */
-
+         Collective\Html\HtmlServiceProvider::class,
         //
 
         /*
@@ -181,7 +179,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Spatie\Fractal\FractalServiceProvider::class,
+         Spatie\Fractal\FractalServiceProvider::class,
+        
+
 
     ],
 
@@ -197,9 +197,6 @@ return [
     */
 
     'aliases' => [
-    // Other service aliases...
-
-
 
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -234,7 +231,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
         'Fractal' => Spatie\Fractal\FractalFacade::class,
+        
+
     ],
 
 ];

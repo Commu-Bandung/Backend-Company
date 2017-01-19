@@ -16,6 +16,6 @@ class SocialAuthController extends Controller
       // we need to change this method too
       $user = $service->createOrGetUser(Socialite::driver($provider));
       auth()->login($user);
-      return redirect()->to('/home');
+      return redirect()->to('adminlte::home');
     }
 }

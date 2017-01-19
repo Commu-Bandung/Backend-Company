@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Post;
 
 class User extends Authenticatable
 {
@@ -16,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-         'name', 'email', 'password', 'api_token'
+        'name', 'email', 'nama_perusahaan', 'alamat_perusahaan', 'deskripsi_perusahaan', 'jenis_perusahaan', 'password','api_token'
     ];
 
     /**
@@ -28,12 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function posts()
-    {
-      return $this->hasMany(Post::class);
-    }
-
-    function socialProviders()
+      function socialProviders()
     {
       return $this->hasMany(SocialProvider::class);
     }
